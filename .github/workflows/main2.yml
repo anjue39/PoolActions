@@ -13,41 +13,32 @@ on:
       # - Webhook
   workflow_dispatch: #手动调试按钮
 
-jobs:
-  Update:
+jobs: 
+  my-job: 
+    name: Max Job
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-    - name: Install Python
-      uses: actions/setup-python@v2
+    steps: 
+    - uses: actions/checkout@v3     #git clone
+    - uses: actions/setup-node@v3   #Node.js环境
       with:
-        python-version: '3.x'
-    - name: Load Cache
-      uses: actions/cache@v2
+        node-version: '16.x'        #Node.js 16.x
+    - uses: actions/setup-python@v4 #python环境
       with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/run_in_Actions/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Setup Timezone
+        python-version: '3.x'       #python 3.x
+        cache: 'pip'                #pip cache
+    - name: Timezone #UTC+0 → UTC+8
       run: sudo timedatectl set-timezone 'Asia/Shanghai'
-    - name: Install Requirements
+    - name: git
+      run: | #配置git的上传用户名和邮箱
+         git config pull.rebase false
+         git config --local user.name "GitHub Actions"
+         git config --local user.email "actions@github.com"
+    - name: 安装依赖
       run: |
         pip install -r requirements.txt
-    - name: Update Subscribe
+    - name: 执行任务
       run: |
         python main2.py
-    - name: Make Some Difference
-      run: |
-        echo "$(date '+%Y-%m-%d %H:%M:%S')" > .timestamp
-    - name: Commit Changes
-      run: |
-        git config core.ignorecase false
-        git config --local user.email "anjue39@qq.com"
-        git config --local user.name "anjue39"
-        git add subscribe/clash.yaml
-        git commit -m "Updated at $(date '+%Y-%m-%d %H:%M:%S')"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+         
+    - name: git push
+      run: ./.github/update-repo.sh || true
