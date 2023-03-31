@@ -1,15 +1,18 @@
-name: 自动采集
+name: 自动采集proxy
 
-# 触发条件
-on:
-  # push的时候触发
-  # push:
-  #   branches: main
-  workflow_dispatch:
-  # 定时触发
-  schedule:
-    - cron: 0 6 * * *
-
+on: 
+  # schedule: #UTC+0               #UTC+8
+  #   - cron: '*/35 0-8 * * 1-5'   #工作日 上午8:00 - 下午4:00
+  #   - cron: '*/25 8-14 * * 1-5'  #工作日 下午4:00 - 晚上10:00
+  #   - cron: '*/55 14-21 * * 1-4' #工作日 晚上10:00 - 次日凌晨5:00
+  #   - cron: '*/25 21-23 * * 1-5' #工作日 次日凌晨5:00 - 次日上午8:00
+  #   - cron: '*/25 14-21 * * 5'   #星期五 晚上10:00 - 次日凌晨5:00
+  #   - cron: '*/25 * * * 0,6'     #休息日 全天候
+  # repository_dispatch: #https://www.chenshaowen.com/blog/how-to-trigger-github-action-remotely.html
+    # types:
+      # - Webhook
+  workflow_dispatch: #手动调试按钮
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -39,8 +42,8 @@ jobs:
     - name: 提交更改
       run: |     
          git pull origin main
-         git config --local user.email "xhrzg2017@gmail.com"
-         git config --local user.name "xhrzg2017"
+         git config --local user.email "anjue39@qq.com"
+         git config --local user.name "anjue39"
          git add subscribe/clash.txt
          git commit -m "更新订阅链接"
     - name: 推送更改
