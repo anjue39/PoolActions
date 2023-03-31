@@ -2,18 +2,15 @@
 
 通过GitHub的actions自动采集节点并生成订阅信息，因为众所周知的原因，节点可能随时BB，且用且珍惜。  
 订阅地址如果出现问题，我会抽空改的，瑞斯拜~。 
-
+源于xhrzg2017的代code，本项目用于测试用。
 ## CLASH软件订阅地址
 
->**原版**  
+>**测试版**  
 >优点：文件都是最新的  
 >缺点：有时github抽风，国内无法访问，导致无法拉取到节点
 ```
-https://raw.githubusercontent.com/xhrzg2017/ProxiesActions/main/subscribe/clash.yaml
-```
-
-
-  
+https://raw.githubusercontent.com/anju39/PoolActions/main/subscribe/clash.yaml
+```  
   
     
 ## 非CLASH软件（WinXray/其它）订阅地址
@@ -21,7 +18,7 @@ https://raw.githubusercontent.com/xhrzg2017/ProxiesActions/main/subscribe/clash.
 >**镜像**  
 >注意：因为采用clash的providers方式加载节点和规则，所以非clash软件无法拉取节点。可以尝试使用此订阅链接  
 ```
-https://cdn.jsdelivr.net/gh/xhrzg2017/ProxiesActions@main/subscribe/clash.txt
+https://cdn.jsdelivr.net/gh/anju39/PoolActions@main/subscribe/clash.txt
 ```
    
   
@@ -38,11 +35,4 @@ https://cdn.jsdelivr.net/gh/xhrzg2017/ProxiesActions@main/subscribe/clash.txt
 
 ## 免责申明
 #### 订阅节点仅作学习交流用，用于查找资料，学习知识，不要做任何违法行为。  
-#### 所有资源均来自互联网，非盈利目的，仅供大家交流学习使用，出现违法问题概不负责。
-
-## 他们都STAR了
-[![Stargazers repo roster for @xhrzg2017/ProxiesActions](https://reporoster.com/stars/xhrzg2017/ProxiesActions)](https://github.com/xhrzg2017/ProxiesActions/stargazers)
-  
-
-## 他们都FORK了
-[![Forkers repo roster for @xhrzg2017/ProxiesActions](https://reporoster.com/forks/xhrzg2017/ProxiesActions)](https://github.com/xhrzg2017/ProxiesActions/network/members)
+#### 所有资源均来自互联网，非盈利目的，仅交流学习使用，出现违法问题概不负责。
