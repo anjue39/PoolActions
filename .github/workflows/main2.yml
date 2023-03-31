@@ -44,8 +44,8 @@ jobs:
     - name: Commit Changes
       run: |
         git config core.ignorecase false
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.email "anjue39@qq.com"
+        git config --local user.name "anjue39"
         git add subscribe/clash.yaml
         git commit -m "Updated at $(date '+%Y-%m-%d %H:%M:%S')"
         git push
