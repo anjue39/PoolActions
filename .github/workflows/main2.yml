@@ -49,3 +49,5 @@ jobs:
         git add subscribe/clash.yaml
         git commit -m "Updated at $(date '+%Y-%m-%d %H:%M:%S')"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
