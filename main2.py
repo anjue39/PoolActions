@@ -3,7 +3,7 @@ import ssl,os
 context = ssl._create_unverified_context()
 
 #1.数据url
-url = 'https://api.wcc.best/sub?target=clash&new_name=true&url=https://github.com/xhrzg2017/ProxiesActions/raw/main/subscribe/clash.txt&config=https://raw.githubusercontent.com/xhrzg2017/listes/main/Clash/Config/fakeip.ini&emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false'
+url = 'https://ghproxy.com/https://raw.githubusercontent.com/aiboboxx/clashfree/main/clash.yml'
 #2.添加请求头
 headers = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
