@@ -44,8 +44,5 @@ jobs:
          git add subscribe/clash.yaml
          git commit -m "$(date '+%Y.%m.%d %H:%M:%S') 订阅更新"
          
-    - name: 推送更改
-      uses:  ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.token }}
-        branch: main
+    - name: git push
+      run: ./.github/update-repo.sh || true
