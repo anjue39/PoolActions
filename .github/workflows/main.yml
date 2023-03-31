@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 迁出代码
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
     - name: 安装Python
       uses: actions/setup-python@v2
       with:
@@ -49,5 +49,5 @@ jobs:
     - name: 推送更改
       uses:  ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.TOKEN }}
+        github_token: ${{ secrets.token }}
         branch: main
