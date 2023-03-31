@@ -46,6 +46,6 @@ jobs:
         git config core.ignorecase false
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add subscribe/clash3.yaml
+        git add subscribe/clash.yaml
         git commit -m "Updated at $(date '+%Y-%m-%d %H:%M:%S')"
         git push
