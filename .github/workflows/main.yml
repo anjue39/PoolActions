@@ -40,4 +40,4 @@ jobs:
         python main.py
           
     - name: 提交更改
-      run: ./.github/update-repo.sh || true
+      run: git pull origin main && git add && git commit -m "$(date '+%Y.%m.%d %H:%M:%S') 订阅更新" && git push origin main
