@@ -13,32 +13,41 @@ on:
       # - Webhook
   workflow_dispatch: #手动调试按钮
 
-jobs: 
-  my-job: 
-    name: Max Job
+jobs:
+  deploy:
     runs-on: ubuntu-latest
-    steps: 
-    - uses: actions/checkout@v3     #git clone
-    - uses: actions/setup-node@v3   #Node.js环境
+    steps:
+    - name: 迁出代码
+      uses: actions/checkout@v2
+    - name: 安装Python
+      uses: actions/setup-python@v2
       with:
-        node-version: '16.x'        #Node.js 16.x
-    - uses: actions/setup-python@v4 #python环境
+        python-version: '3.8'
+    - name: 加载缓存  
+      uses: actions/cache@v2
       with:
-        python-version: '3.x'       #python 3.x
-        cache: 'pip'                #pip cache
-    - name: Timezone #UTC+0 → UTC+8
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/run_in_Actions/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: 设置时区
       run: sudo timedatectl set-timezone 'Asia/Shanghai'
-    - name: git
-      run: | #配置git的上传用户名和邮箱
-         git config pull.rebase false
-         git config --local user.name "GitHub Actions"
-         git config --local user.email "actions@github.com"
     - name: 安装依赖
       run: |
         pip install -r requirements.txt
     - name: 执行任务
       run: |
         python main2.py
-         
-    - name: git push
-      run: ./.github/update-repo.sh || true
+          
+    - name: 提交更改
+      run: |     
+         git pull origin main
+         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+         git config --local user.name "github-actions[bot]"
+         git add subscribe/clash.yaml
+         git commit -m "更新订阅链接"
+    - name: 推送更改
+      uses:  ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.token }}
+        branch: main
