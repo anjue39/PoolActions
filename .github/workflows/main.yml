@@ -44,6 +44,10 @@ jobs:
          git pull origin main
          git config --local user.name "GitHub Actions"
          git config --local user.email "actions@github.com"
-         git add subscribe/
+         git add .
          git commit -m "更新订阅链接"
-         git push origin main
+    - name: 推送更改
+      uses:  ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.token }}
+        branch: main
