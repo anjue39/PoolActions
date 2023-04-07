@@ -42,12 +42,8 @@ jobs:
     - name: 提交更改
       run: |     
          git pull origin main
-         git config --local user.email "anjue39@qq.com
+         git config --local user.email "anjue39@qq.com"
          git config --local user.name "anjue39"
          git add subscribe/clash.txt
          git commit -m "更新订阅链接"
-    - name: 推送更改
-      uses:  ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.token }}
-        branch: main
+         git push -f origin main
