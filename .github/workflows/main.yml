@@ -46,3 +46,5 @@ jobs:
          git config --local user.name "anjue39"
          git add subscribe/clash.txt
          git commit -m "更新订阅链接"
+         git push -f origin main
+      run: |
