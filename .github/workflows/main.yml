@@ -40,10 +40,4 @@ jobs:
         python main.py
           
     - name: 提交更改
-      run: |     
-         git pull origin main
-         git config --local user.name "GitHub Actions"
-         git config --local user.email "actions@github.com"
-         git add subscribe/clash.txt
-         git commit -m "$(date '+%Y.%m.%d %H:%M:%S') 订阅更新" 
-         git push -f origin main
+      run: ./.github/update-repo.sh || true
