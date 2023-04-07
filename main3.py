@@ -3,7 +3,7 @@ import ssl,os
 context = ssl._create_unverified_context()
 
 #1.数据url
-url = 'https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg'
+url = 'https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBdTJrVnZsREc4MU1oZ0puendMTVN5ZmljYmpnP2U9bVkzZ2ly'
 #2.添加请求头
 headers = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
