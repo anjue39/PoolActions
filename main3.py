@@ -31,5 +31,5 @@ with open(dirs+'/clash.yaml', 'w+', encoding='utf-8') as f:
     info ='#'+time+'更新 \n' + '#本yaml文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
     f.write(info)
     f.close()
-with open(dirs + '/clash.yaml', 'ab') as f:
+with open(dirs + '/clash3.yaml', 'ab') as f:
     f.write(data)
