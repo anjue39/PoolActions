@@ -1,5 +1,6 @@
 import urllib.request
-import ssl,os
+import ssl,os,time
+from datetime import datetime, timedelta, timezone
 context = ssl._create_unverified_context()
 
 #1.数据url
@@ -19,5 +20,12 @@ data = response.read()
 dirs = './subscribe'
 if not os.path.exists(dirs):
     os.makedirs(dirs)
-with open(dirs+'/clash.txt', 'wb') as f:
+utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
+time = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
+with open(dirs+'/clash.txt', 'w+', encoding='utf-8') as f:
+    # print(data)
+    info ='#'+time+'更新 \n' + '#本txt文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
+    f.write(info)
+    f.close()
+with open(dirs+'/clash.txt', 'ab') as f:
     f.write(data)
