@@ -45,7 +45,7 @@ jobs:
          git config --local user.email "anjue39@qq.com"
          git config --local user.name "anjue39"
          git add subscribe/clash3.yaml
-         git commit -m "更新订阅链接"
+         git commit -m "$(date '+%Y.%m.%d %H:%M:%S') 订阅更新clash3" 
     - name: 推送更改
       uses: ad-m/github-push-action@master
       with:
