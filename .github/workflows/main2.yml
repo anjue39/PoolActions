@@ -12,7 +12,7 @@ on:
     # types:
       # - Webhook
   workflow_dispatch: #手动调试按钮
-
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -40,14 +40,14 @@ jobs:
         python main2.py
           
     - name: 提交更改
-      run: |     
+      run: |    
          git pull origin main
-         git config --local user.email "anjue39@qq.com
+         git config --local user.email "anjue39@qq.com"
          git config --local user.name "anjue39"
          git add subscribe/clash.yaml
-         git commit -m "$(date '+%Y.%m.%d %H:%M:%S') 订阅更新clash" 
+         git commit -m "$(date '+%Y.%m.%d %H:%M:%S') 订阅更新clash3" 
     - name: 推送更改
-      uses:  ad-m/github-push-action@master
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.token }}
         branch: main
