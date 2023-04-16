@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 context = ssl._create_unverified_context()
 
 #1.数据url
-url = 'http://weoknow.com/data/dayupdate/2/z.yaml'
+url = 'https://sub.xeton.dev/sub?target=clash&url=http://weoknow.com/data/dayupdate/2/z.yaml&config=https://raw.githubusercontent.com/anjue39/openit/main/utils/subconverter/config/rule_mini.ini&emoji=true&list=false&udp=false&tfo=false&scv=false&fdn=false&sort=false'
 #2.添加请求头
 headers = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
