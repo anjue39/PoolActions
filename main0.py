@@ -27,5 +27,5 @@ with open(dirs+'/clash.txt', 'w+', encoding='utf-8') as f:
     info ='#'+time+'更新 \n' + '#本txt文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
     f.write(info)
     f.close()
-with open(dirs+'/clash.txt', 'ab') as f:
+with open(dirs+'/clash0.txt', 'ab') as f:
     f.write(data)
