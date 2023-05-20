@@ -9,7 +9,7 @@ from datetime import datetime, timedelta, timezone
 
 def fetch(proxy_list):
     current_date = time.strftime("%Y%m%d", time.localtime())
-    baseurl = 'https://github.com/guoxing123/jiedian/raw/main/'
+    baseurl = 'https://raw.githubusercontent.com/guoxing123/jiedian/main'
 
     try:
         response = requests.get(baseurl, timeout=240)
@@ -45,7 +45,7 @@ utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
 time_str = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
 
 # Write the data to the file
-filename = os.path.join(dirs, 'clash.yaml')
+filename = os.path.join(dirs, 'clash5.yaml')
 with open(filename, 'w', encoding='utf-8') as f:
     info = f"# {time_str} 更新\n" \
            f"# 本yaml文件由Actions定时生成\n" \
