@@ -1,10 +1,10 @@
-import time
-import os
 from datetime import datetime, timedelta, timezone
 import requests
 import yaml
 import re
-
+import ssl,os,time
+from datetime import datetime, timedelta, timezone
+context = ssl._create_unverified_context()
 
 def fetch(proxy_list):
     current_date = time.strftime("%Y%m%d", time.localtime())
