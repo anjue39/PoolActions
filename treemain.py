@@ -16,7 +16,7 @@ def fetch(proxy_list):
     # 获取当前日期
     current_date = time.strftime("%Y%m%d", time.localtime())
     # 数据源的基础URL
-    baseurl = 'https://raw.githubusercontent.com/guoxing123/jiedian/main/'
+    baseurl = 'https://raw.githubusercontent.com/anjue39/PoolActions/main/subscribe/'
 
     try:
         # 创建请求对象并添加头部信息
