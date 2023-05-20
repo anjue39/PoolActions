@@ -5,6 +5,8 @@ import requests
 import yaml
 import re
 
+headers = {'Accept': '*/*', 'Accept-Encoding': 'gzip', 'Connection': 'Keep-Alive', 'User-Agent': 'Clash'}
+
 def fetch(proxy_list):
     current_date = time.strftime("%Y%m%d", time.localtime())
     baseurl = 'https://github.com/guoxing123/jiedian/raw/main/'
@@ -12,6 +14,7 @@ def fetch(proxy_list):
     try:
         response = requests.get(baseurl, timeout=240)
         if response.status_code == 200:
+            data = response.content
             filenames = re.findall(r'\d+', response.text)
             for filename in filenames:
                 if current_date in filename:
@@ -26,8 +29,7 @@ def fetch(proxy_list):
         print("File not found for the current date.")
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {str(e)}")
-
-data = response.read()        
+        
 # 调用fetch函数
 proxy_list = []
 fetch(proxy_list)
