@@ -71,7 +71,7 @@ filename = dirs + '/clash5.yaml'
 # 打开文件并写入代理数据
 with open(filename, 'w+', encoding='utf-8') as f:
     # 添加文件的头部信息
-    info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
+    info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：'
     f.write(info)
     # 使用yaml.safe_dump将代理列表以YAML格式写入文件
-    # yaml.safe_dump(proxy_list, f, default_flow_style=False)
+    yaml.safe_dump(proxy_list, f, default_flow_style=False)
