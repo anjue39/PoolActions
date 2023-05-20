@@ -68,10 +68,10 @@ time_str = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H
 
 # 拼接保存文件的完整路径
 filename = dirs + '/clash5.yaml'
-# 打开文件并写入代理数据
-with open(filename, 'w+', encoding='utf-8') as f:
+# 写入转换后的数据到文件
+with open(filename, 'w', encoding='utf-8') as f:
     # 添加文件的头部信息
-    info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：'
+    info = '#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：'
     f.write(info)
     # 将代理列表转换为YAML格式的字符串
     proxy_data = yaml.dump(proxy_list, default_flow_style=False)
