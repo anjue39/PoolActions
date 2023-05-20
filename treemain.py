@@ -74,5 +74,6 @@ with open(filename, 'w+', encoding='utf-8') as f:
     info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：'
     f.write(info)
     f.close()
-data_str = '\n'.join(proxy_list)  # 将列表中的元素拼接成一个字符串，每个元素占一行
-    f.write(data_str)
+data_bytes = '\n'.join(proxy_list).encode('utf-8')  # 将字符串转换为字节对象
+with open(filename, 'wb') as f:
+    f.write(data_bytes)
