@@ -52,11 +52,12 @@ def fetch_and_save_data(baseurl, dirs, extension):
         print(f"Error fetching data: {str(e)}")
 
 
-# 指定文件扩展名
-extension = 'yaml'
+#3.构建请求对象
+request = urllib.request.Request(url, headers=headers)  #使用Request可以加请求头对象
+#4.发送请求对象
+response = urllib.request.urlopen(request,context=context)
 #5.读取数据
-data = req.read()
-#print(data)
+data = response.read()
 #6.保存到文件中 验证数据
 dirs = './subscribe'
 if not os.path.exists(dirs):
