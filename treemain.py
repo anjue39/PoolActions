@@ -52,7 +52,7 @@ def fetch_and_save_data(baseurl, dirs, extension):
         print(f"Error fetching data: {str(e)}")
 
 # 指定数据源的基础URL
-baseurl = 'https://raw.githubusercontent.com/anjue39/PoolActions/main/subscribe/'
+baseurl = 'https://github.com/anjue39/PoolActions/tree/main/subscribe/'
 # 指定保存文件的目录
 dirs = './subscribe'
 # 指定文件扩展名
