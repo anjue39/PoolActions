@@ -29,9 +29,15 @@ def fetch(proxy_list):
 proxy_list = []
 fetch(proxy_list)
 
-filename = './subscribe'
-with open(filename, 'w') as file:
-    for proxies in proxy_list:
-        for proxy in proxies:
-            file.write(proxy + '\n')
-print(f"Results saved to '{filename}'")
+dirs = './subscribe'
+if not os.path.exists(dirs):
+    os.makedirs(dirs)
+utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
+time = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
+with open(dirs+'/clash5.yaml', 'w+', encoding='utf-8') as f:
+    # print(data)
+    info ='#'+time+'更新 \n' + '#本yaml文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
+    f.write(info)
+    f.close()
+with open(dirs + '/clash5.yaml', 'ab') as f:
+    f.write(data)
