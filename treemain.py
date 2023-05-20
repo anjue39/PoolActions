@@ -56,7 +56,7 @@ def fetch(proxy_list):
 proxy_list = []
 # 调用fetch函数，将获取的代理数据填充到列表中
 fetch(proxy_list)
-data = response.read(req)
+data = req.read()
 
 # 指定保存文件的目录
 dirs = './subscribe'
