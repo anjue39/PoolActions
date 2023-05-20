@@ -17,8 +17,13 @@ def fetch(proxy_list):
     baseurl = 'https://github.com/guoxing123/jiedian/raw/main/'
 
     try:
+        # 创建请求对象并添加头部信息
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+        }
+        req = urllib.request.Request(baseurl, headers=headers)
         # 发送HTTP GET请求获取数据源页面
-        with urllib.request.urlopen(baseurl, context=ssl._create_unverified_context()) as response:
+        with urllib.request.urlopen(req, context=ssl._create_unverified_context()) as response:
             if response.getcode() == 200:
                 # 获取数据源页面的内容
                 data = response.read()
@@ -29,8 +34,10 @@ def fetch(proxy_list):
                     if current_date in filename:
                         # 构造完整的URL
                         url = baseurl + filename
+                        # 创建请求对象并添加头部信息
+                        req = urllib.request.Request(url, headers=headers)
                         # 从URL获取数据并解析为YAML格式
-                        with urllib.request.urlopen(url, context=ssl._create_unverified_context()) as yaml_response:
+                        with urllib.request.urlopen(req, context=ssl._create_unverified_context()) as yaml_response:
                             working = yaml.safe_load(yaml_response)
                             data_out = []
                             for x in working['proxies']:
@@ -65,4 +72,3 @@ with open(filename, 'w+', encoding='utf-8') as f:
     info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
     f.write(info)
     # 使用yaml.safe_dump将代理列表以YAML格式写入文件
-    yaml.safe_dump(proxy_list, f, default_flow_style=False)
