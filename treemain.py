@@ -1,19 +1,22 @@
 import urllib.request
+from datetime import datetime, timedelta, timezone
 import requests
 import yaml
 import re
 import ssl
 import os
 import time
-from datetime import datetime, timedelta, timezone
+
+context = ssl._create_unverified_context()
 
 def fetch(proxy_list):
     current_date = time.strftime("%Y%m%d", time.localtime())
-    baseurl = 'https://raw.githubusercontent.com/guoxing123/jiedian/main'
+    baseurl = 'https://github.com/guoxing123/jiedian/raw/main/'
 
     try:
         response = requests.get(baseurl, timeout=240)
         if response.status_code == 200:
+            data = response.content
             filenames = re.findall(r'\d+', response.text)
             for filename in filenames:
                 if current_date in filename:
@@ -25,34 +28,23 @@ def fetch(proxy_list):
                     proxy_list.append(data_out)
                     print("Data fetched successfully.")
                     return
-            print("File not found for the current date.")
-        else:
-            print("Error fetching data. Response status:", response.status_code)
+        print("File not found for the current date.")
     except requests.exceptions.RequestException as e:
-        print("Error fetching data:", str(e))
+        print(f"Error fetching data: {str(e)}")
 
-# Create the 'subscribe' directory if it doesn't exist
+# 调用fetch函数
+proxy_list = []
+fetch(proxy_list)
+
 dirs = './subscribe'
 if not os.path.exists(dirs):
     os.makedirs(dirs)
 
-# Fetch the proxy data
-proxy_list = []
-fetch(proxy_list)
-
-# Generate the timestamp
 utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
 time_str = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
 
-# Write the data to the file
-filename = os.path.join(dirs, 'clash5.yaml')
-with open(filename, 'w', encoding='utf-8') as f:
-    info = f"# {time_str} 更新\n" \
-           f"# 本yaml文件由Actions定时生成\n" \
-           f"# 项目地址：https://github.com/xhrzg2017/ProxiesActions\n"
+filename = dirs + '/clash5.yaml'
+with open(filename, 'w+', encoding='utf-8') as f:
+    info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
     f.write(info)
-    for proxy_data in proxy_list:
-        f.write(proxy_data)
-        f.write('\n')
-
-print("Data saved successfully.")
+    yaml.safe_dump(proxy_list, f, default_flow_style=False)
