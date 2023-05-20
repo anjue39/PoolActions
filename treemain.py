@@ -9,13 +9,6 @@ import os
 import time
 from datetime import datetime, timedelta, timezone
 
-import urllib.request
-import os
-import re
-import ssl
-import time
-from datetime import datetime, timedelta, timezone
-
 # 忽略SSL证书验证
 ssl._create_default_https_context = ssl._create_unverified_context
 
