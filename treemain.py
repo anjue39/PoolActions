@@ -35,7 +35,7 @@ def fetch(proxy_list):
                     # 查找包含当前日期的文件名
                     if current_date in filename:
                         # 构造完整的URL
-                        url = baseurl + filename
+                        url = baseurl + filename + '.yaml' 
                         # 创建请求对象并添加头部信息
                         req = urllib.request.Request(url, headers=headers)
                         # 从URL获取数据并解析为YAML格式
