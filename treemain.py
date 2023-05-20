@@ -51,16 +51,22 @@ def fetch_and_save_data(baseurl, dirs, extension):
     except urllib.error.URLError as e:
         print(f"Error fetching data: {str(e)}")
 
-# 指定数据源的基础URL
-baseurl = 'https://github.com/anjue39/PoolActions/tree/main/subscribe/'
-# 指定保存文件的目录
-dirs = './subscribe'
+
 # 指定文件扩展名
 extension = 'yaml'
-
-# 创建保存文件的目录
+#5.读取数据
+data = req.read()
+#print(data)
+#6.保存到文件中 验证数据
+dirs = './subscribe'
 if not os.path.exists(dirs):
     os.makedirs(dirs)
-
-# 调用fetch_and_save_data函数，获取数据并保存到文件
-fetch_and_save_data(baseurl, dirs, extension)
+utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
+time = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
+with open(dirs+'/clash5.yaml', 'w+', encoding='utf-8') as f:
+    # print(data)
+    info ='#'+time+'更新 \n' + '#本txt文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
+    f.write(info)
+    f.close()
+with open(dirs+'/clash5.yaml', 'ab') as f:
+    f.write(data)
