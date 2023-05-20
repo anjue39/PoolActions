@@ -73,5 +73,6 @@ with open(filename, 'w+', encoding='utf-8') as f:
     # 添加文件的头部信息
     info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：'
     f.write(info)
-    # 使用yaml.safe_dump将代理列表以YAML格式写入文件
-    yaml.safe_dump(data_out, f, default_flow_style=False)
+    f.close()
+with open(dirs+'/clash5.yaml', 'ab') as f:
+    f.write(proxy_list)
