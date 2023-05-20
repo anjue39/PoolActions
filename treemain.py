@@ -1,4 +1,6 @@
 # 这是未使用request组件的代码
+# 代码适用于遍历某网址目录文件夹下，找到文件名含有当前日期的订阅文件并收集它
+
 import urllib.request
 import yaml
 import re
@@ -14,7 +16,7 @@ def fetch(proxy_list):
     # 获取当前日期
     current_date = time.strftime("%Y%m%d", time.localtime())
     # 数据源的基础URL
-    baseurl = 'https://github.com/guoxing123/jiedian/raw/main/'
+    baseurl = 'https://raw.githubusercontent.com/guoxing123/jiedian/main/'
 
     try:
         # 创建请求对象并添加头部信息
@@ -72,3 +74,4 @@ with open(filename, 'w+', encoding='utf-8') as f:
     info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
     f.write(info)
     # 使用yaml.safe_dump将代理列表以YAML格式写入文件
+    # yaml.safe_dump(proxy_list, f, default_flow_style=False)
