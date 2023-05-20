@@ -1,15 +1,14 @@
-# 这是使用了request组件的代码
-    
+# 这是未使用request组件的代码
 import urllib.request
-from datetime import datetime, timedelta, timezone
-import requests
 import yaml
 import re
 import ssl
 import os
 import time
+from datetime import datetime, timedelta, timezone
 
-context = ssl._create_unverified_context()
+# 忽略SSL证书验证
+ssl._create_default_https_context = ssl._create_unverified_context
 
 def fetch(proxy_list):
     # 获取当前日期
@@ -19,28 +18,29 @@ def fetch(proxy_list):
 
     try:
         # 发送HTTP GET请求获取数据源页面
-        response = requests.get(baseurl, timeout=240)
-        if response.status_code == 200:
-            # 获取数据源页面的内容
-            data = response.content
-            # 从页面内容中提取所有的文件名（带日期）
-            filenames = re.findall(r'\d+', response.text)
-            for filename in filenames:
-                # 查找包含当前日期的文件名
-                if current_date in filename:
-                    # 构造完整的URL
-                    url = baseurl + filename
-                    # 从URL获取数据并解析为YAML格式
-                    working = yaml.safe_load(requests.get(url, timeout=240).text)
-                    data_out = []
-                    for x in working['proxies']:
-                        data_out.append(x)
-                    # 将解析的代理数据添加到列表中
-                    proxy_list.append(data_out)
-                    print("Data fetched successfully.")
-                    return
-        print("File not found for the current date.")
-    except requests.exceptions.RequestException as e:
+        with urllib.request.urlopen(baseurl, context=ssl._create_unverified_context()) as response:
+            if response.getcode() == 200:
+                # 获取数据源页面的内容
+                data = response.read()
+                # 从页面内容中提取所有的文件名（带日期）
+                filenames = re.findall(r'\d+', data.decode('utf-8'))
+                for filename in filenames:
+                    # 查找包含当前日期的文件名
+                    if current_date in filename:
+                        # 构造完整的URL
+                        url = baseurl + filename
+                        # 从URL获取数据并解析为YAML格式
+                        with urllib.request.urlopen(url, context=ssl._create_unverified_context()) as yaml_response:
+                            working = yaml.safe_load(yaml_response)
+                            data_out = []
+                            for x in working['proxies']:
+                                data_out.append(x)
+                            # 将解析的代理数据添加到列表中
+                            proxy_list.append(data_out)
+                            print("Data fetched successfully.")
+                            return
+            print("File not found for the current date.")
+    except urllib.error.URLError as e:
         print(f"Error fetching data: {str(e)}")
 
 # 创建一个空的代理列表
