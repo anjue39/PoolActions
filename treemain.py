@@ -73,5 +73,7 @@ with open(filename, 'w+', encoding='utf-8') as f:
     # 添加文件的头部信息
     info ='#' + time_str + ' 更新\n' + '#本yaml文件由Actions定时生成\n#项目地址：'
     f.write(info)
-    # 使用yaml.safe_dump将代理列表以YAML格式写入文件
-    yaml.safe_dump(proxy_list, f, default_flow_style=False)
+    # 将代理列表转换为YAML格式的字符串
+    proxy_data = yaml.dump(proxy_list, default_flow_style=False)
+    # 写入转换后的数据到文件
+    f.write(proxy_data)
