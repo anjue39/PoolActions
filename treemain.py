@@ -51,12 +51,15 @@ def fetch(proxy_list):
             print("File not found for the current date.")
     except urllib.error.URLError as e:
         print(f"Error fetching data: {str(e)}")
-result = fetch()
 
 # 创建一个空的代理列表
 proxy_list = []
-# 调用fetch函数，将获取的代理数据填充到列表中
-fetch(proxy_list)
+result = fetch()
+# 判断是否获取到代理数据
+if result is not None:
+    # 将代理数据转换为字符串格式
+    result_str = yaml.dump(result)
+
 
 # 指定保存文件的目录
 dirs = './subscribe'
@@ -76,4 +79,4 @@ with open(filename, 'w+', encoding='utf-8') as f:
     f.write(info)
     f.close()
 with open(filename, 'wb') as f:
-    f.write(result)
+   f.write(result_str)
