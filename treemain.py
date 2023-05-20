@@ -1,3 +1,6 @@
+import time
+import requests
+import yaml
 
 def fetch(proxy_list):
     current_date = time.strftime("%Y%m%d", time.localtime())
@@ -16,14 +19,12 @@ def fetch(proxy_list):
                            data_out.append(x)
                     proxy_list.append(data_out)
 proxy_list = []
+fetch(proxy_list)
 
-#6.保存到文件中
-print("保存到文件中")
-dirs = './subscribe'
-with open(dirs+'/clash5.yaml', 'w+', encoding='utf-8') as f:
-    # print(data)
-    info ='#'+time+'更新 \n' + '#本yaml文件由Actions定时生成\n#项目地址：https://github.com/xhrzg2017/ProxiesActions\n'
-    f.write(info)
-    f.close()
-with open(dirs + '/clash5.yaml', 'ab') as f:
-    f.write(data)
+# 保存结果到文件
+filename = './subscribe'
+with open(filename, 'w') as file:
+    for proxies in proxy_list:
+        for proxy in proxies:
+            file.write(proxy + '\n')
+print(f"Results saved to '{filename}'")
