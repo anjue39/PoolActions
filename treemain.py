@@ -56,6 +56,7 @@ def fetch(proxy_list):
 proxy_list = []
 # 调用fetch函数，将获取的代理数据填充到列表中
 fetch(proxy_list)
+data = response.read(req)
 
 # 指定保存文件的目录
 dirs = './subscribe'
@@ -76,4 +77,4 @@ with open(filename, 'w+', encoding='utf-8') as f:
     f.close()
 data_bytes = '\n'.join(proxy_list).encode('utf-8')  # 将字符串转换为字节对象
 with open(filename, 'wb') as f:
-    f.write(data_bytes)
+    f.write(data)
