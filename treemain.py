@@ -27,6 +27,7 @@ def fetch(proxy_list):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {str(e)}")
 
+data = response.read()        
 # 调用fetch函数
 proxy_list = []
 fetch(proxy_list)
